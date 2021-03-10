@@ -1,0 +1,48 @@
+.pokemon {
+  margin-top: 200px;
+  align-items: center;
+}
+.pokemon {
+  position: relative;
+  height: 90px;
+  width: 90px;
+  background: linear-gradient(to bottom, rgb(254, 0, 1) 50%, white 50% );
+  border-radius: 50%;
+  border: 6px solid black;
+  animation: spin 1s linear infinite;
+}
+
+.pokemon::before {
+  content: '';
+  position: absolute;
+  height: 8px;
+  width: 80px;
+  background: black;
+  top: 48px;
+  transform: translatey(-160%);
+}
+
+.pokemon::after {
+  content: '';
+  position: absolute;
+  height: 35px;
+  width: 35px;
+  border-radius: 50%;
+  background: white;
+  top: 39px;
+  left: 39px;
+  transform: translate(-50%, -50%);
+  box-shadow: inset 0 0 0 8px black, inset 0 0 0 10px white, inset 0 0 0 12px black;
+
+}
+
+/* Spin Animation*/
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
