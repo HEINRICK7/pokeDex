@@ -13,35 +13,37 @@ const Home = () => {
     const [pokemons, setPokemons] = useState([])
     const [ search, setSearch ] = useState('');
     const [loading, setLoading] = useState(true);
-    const urlPokemonApi = `https://pokeapi.co/api/v2/pokemon/`
+    const urlPokemonApi = `https://pokeapi.co/api/v2/pokemon?limit=100`
 
     useEffect(() => {
        async function fetchData() {
            const response = await getAllPokemon(urlPokemonApi);
             setLoading(false) 
            await pokemonData(response.results);
-    
+           console.log('Deu aki',response.results);
        }
        fetchData();
     }, []);
 
-    const pokemonData = async data => {
+    const pokemonData = async (data) => {
+       
         const loadingPokemon = await Promise.all(
-            data.map(async(pokemon,index) => {
+            data.map(async(pokemon) => {
                 const pokemonRecord = await getPokemon(pokemon.url);
-
-                const id = (index + 1)
-                const image = `https://pokeres.bastionbot.org/images/pokemon/${id}.png`
+               
+                const image = `https://img.pokemondb.net/artwork/vector/large/${pokemon.name}.png`
                 return {
                     ...pokemonRecord,
                     image
 
 
-                }})
+                }}),
+               
         );
         setPokemons(loadingPokemon);
-        console.log('w',pokemons)
+        console.log('kskksks')
     }
+    
     const handleChange = (e) => {
         setSearch(e.target.value)
       }
